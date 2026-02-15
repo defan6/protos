@@ -11,11 +11,16 @@ service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);
+  rpc ListUsers (ListUserRequest) returns (ListUserResponse);
 }
 
 message RegisterRequest {
   string email = 1;
   string password = 2;
+}
+
+message ListUserRequest {
+  string filter_role = 1;
 }
 
 message ListUserResponse {
