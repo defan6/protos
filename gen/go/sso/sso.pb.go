@@ -76,7 +76,7 @@ func (x *RegisterRequest) GetPassword() string {
 
 type ListUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FilterRole    string                 `protobuf:"bytes,1,opt,name=filter_role,json=filterRole,proto3" json:"filter_role,omitempty"`
+	Filters       map[string]string      `protobuf:"bytes,1,rep,name=filters,proto3" json:"filters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -111,11 +111,11 @@ func (*ListUserRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListUserRequest) GetFilterRole() string {
+func (x *ListUserRequest) GetFilters() map[string]string {
 	if x != nil {
-		return x.FilterRole
+		return x.Filters
 	}
-	return ""
+	return nil
 }
 
 type ListUserResponse struct {
@@ -473,10 +473,12 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\rsso/sso.proto\x12\x04auth\x1a\x1fgoogle/protobuf/timestamp.proto\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"2\n" +
-	"\x0fListUserRequest\x12\x1f\n" +
-	"\vfilter_role\x18\x01 \x01(\tR\n" +
-	"filterRole\"4\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\x8b\x01\n" +
+	"\x0fListUserRequest\x12<\n" +
+	"\afilters\x18\x01 \x03(\v2\".auth.ListUserRequest.FiltersEntryR\afilters\x1a:\n" +
+	"\fFiltersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"4\n" +
 	"\x10ListUserResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
 	".auth.UserR\x05users\"{\n" +
@@ -516,7 +518,7 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),       // 0: auth.RegisterRequest
 	(*ListUserRequest)(nil),       // 1: auth.ListUserRequest
@@ -527,24 +529,26 @@ var file_sso_sso_proto_goTypes = []any{
 	(*LoginResponse)(nil),         // 6: auth.LoginResponse
 	(*IsAdminRequest)(nil),        // 7: auth.IsAdminRequest
 	(*IsAdminResponse)(nil),       // 8: auth.IsAdminResponse
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	nil,                           // 9: auth.ListUserRequest.FiltersEntry
+	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	3, // 0: auth.ListUserResponse.users:type_name -> auth.User
-	9, // 1: auth.User.created_at:type_name -> google.protobuf.Timestamp
-	0, // 2: auth.Auth.Register:input_type -> auth.RegisterRequest
-	5, // 3: auth.Auth.Login:input_type -> auth.LoginRequest
-	7, // 4: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	1, // 5: auth.Auth.ListUsers:input_type -> auth.ListUserRequest
-	4, // 6: auth.Auth.Register:output_type -> auth.RegisterResponse
-	6, // 7: auth.Auth.Login:output_type -> auth.LoginResponse
-	8, // 8: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	2, // 9: auth.Auth.ListUsers:output_type -> auth.ListUserResponse
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: auth.ListUserRequest.filters:type_name -> auth.ListUserRequest.FiltersEntry
+	3,  // 1: auth.ListUserResponse.users:type_name -> auth.User
+	10, // 2: auth.User.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 3: auth.Auth.Register:input_type -> auth.RegisterRequest
+	5,  // 4: auth.Auth.Login:input_type -> auth.LoginRequest
+	7,  // 5: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	1,  // 6: auth.Auth.ListUsers:input_type -> auth.ListUserRequest
+	4,  // 7: auth.Auth.Register:output_type -> auth.RegisterResponse
+	6,  // 8: auth.Auth.Login:output_type -> auth.LoginResponse
+	8,  // 9: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	2,  // 10: auth.Auth.ListUsers:output_type -> auth.ListUserResponse
+	7,  // [7:11] is the sub-list for method output_type
+	3,  // [3:7] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_sso_sso_proto_init() }
@@ -558,7 +562,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

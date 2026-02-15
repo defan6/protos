@@ -20,7 +20,7 @@ message RegisterRequest {
 }
 
 message ListUserRequest {
-  string filter_role = 1;
+  map<string, string> filters = 1;
 }
 
 message ListUserResponse {
