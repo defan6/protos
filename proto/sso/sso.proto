@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 package auth;
 
 option go_package = "defan.sso.v1:ssov1";
@@ -14,6 +16,17 @@ service Auth {
 message RegisterRequest {
   string email = 1;
   string password = 2;
+}
+
+message ListUserResponse {
+  repeated User users = 1;
+}
+
+message User {
+  int64 id = 1;
+  string email = 2;
+  bool is_admin = 3;
+  google.protobuf.Timestamp created_at = 4;
 }
 
 
