@@ -30,7 +30,7 @@ message ListUserResponse {
 message User {
   int64 id = 1;
   string email = 2;
-  bool is_admin = 3;
+  string role = 3;
   google.protobuf.Timestamp created_at = 4;
 }
 

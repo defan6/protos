@@ -166,7 +166,7 @@ type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	IsAdmin       bool                   `protobuf:"varint,3,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -216,11 +216,11 @@ func (x *User) GetEmail() string {
 	return ""
 }
 
-func (x *User) GetIsAdmin() bool {
+func (x *User) GetRole() string {
 	if x != nil {
-		return x.IsAdmin
+		return x.Role
 	}
-	return false
+	return ""
 }
 
 func (x *User) GetCreatedAt() *timestamppb.Timestamp {
@@ -479,11 +479,11 @@ const file_sso_sso_proto_rawDesc = "" +
 	"filterRole\"4\n" +
 	"\x10ListUserResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
-	".auth.UserR\x05users\"\x82\x01\n" +
+	".auth.UserR\x05users\"{\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x19\n" +
-	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x129\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\x129\n" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"+\n" +
 	"\x10RegisterResponse\x12\x17\n" +
